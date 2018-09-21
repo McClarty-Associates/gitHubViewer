@@ -1,12 +1,12 @@
 import Vue from 'vue'
-// import App from './App.vue'
-
-Vue.config.productionTip = false
+import AppLayout from './theme/Layout.vue'
+import router from './router'
+import apolloProvider from './Apollo.js'
 
 const app = new Vue({
-  data: {
-    hello: 'Hi There5'
-  },
-  template: '<div id="app">{{ hello }}</div>'
+  router,
+  apolloProvider,
+  ...AppLayout
 })
-export { app }
+
+export { app, apolloProvider, router }
