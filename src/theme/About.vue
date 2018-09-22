@@ -2,8 +2,11 @@
   <div>
 <div>
   <h2>Jim McClarty</h2>
-  <phone>512-736-5099</phone> <email>jim@mcclarty.net</email>
-  <address>Rosemount, MN 55068</address>
+  <div>
+    <div>512-736-5099</div>
+    <div>jim@mcclarty.net</div>
+    <div>Rosemount, MN 55068</div>
+  </div>
 </div>
 
 <ul>
