@@ -1,58 +1,38 @@
 {
-  "name": "proj",
+  "name": "github-viewer",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "rimraf .dist && npm run build:client",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build:client": "NODE_ENV=production webpack --config ./build/webpack.client.config.js --progress --hide-modules",
-    "start:prod": "NODE_ENV=production npm run start"
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.47",
-    "apollo-link-context": "^1.0.9",
+    "bulma": "^0.7.1",
+    "register-service-worker": "^1.0.0",
+    "underscore": "^1.9.1",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.1"
+    "vue-moment": "^4.0.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",
+    "@vue/cli-plugin-e2e-cypress": "^3.0.3",
     "@vue/cli-plugin-eslint": "^3.0.3",
+    "@vue/cli-plugin-pwa": "^3.0.3",
+    "@vue/cli-plugin-unit-jest": "^3.0.3",
     "@vue/cli-service": "^3.0.3",
-    "apollo-boost": "^0.1.16",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.3",
-    "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "bulma": "^0.7.1",
-    "css-loader": "^0.28.5",
-    "eslint": "^4.19.1",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-html": "^3.2.2",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "graphql": "^0.13.2",
-    "graphql-tag": "^2.9.2",
-    "node-sass": "^4.9.3",
-    "pug": "^2.0.3",
-    "pug-loader": "^2.4.0",
-    "sass-loader": "^6.0.6",
-    "underscore": "^1.9.1",
-    "vue-apollo": "^3.0.0-beta.25",
-    "vue-loader": "^14.2.2",
-    "vue-local-storage": "^0.1.3",
-    "vue-moment": "^4.0.0",
-    "vue-server-renderer": "^2.5.17",
-    "vue-template-compiler": "^2.5.17",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-middleware": "^3.3.0",
-    "webpack-hot-middleware": "^2.24.1",
-    "webpack-node-externals": "^1.6.0"
+    "@vue/eslint-config-prettier": "^3.0.3",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.0.1",
+    "lint-staged": "^7.2.2",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {
     "root": true,
@@ -61,7 +41,7 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "@vue/prettier"
     ],
     "rules": {},
     "parserOptions": {
@@ -77,5 +57,41 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ],
+    "testMatch": [
+      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+    ],
+    "testURL": "http://localhost/"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
 }

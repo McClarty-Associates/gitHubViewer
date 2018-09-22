@@ -1,2 +1,0 @@
-export const GH_USER_ID = 'graphcool-user-id'
-export const GH_AUTH_TOKEN = 'graphcool-auth-token'

@@ -1,24 +1,33 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./views/Home.vue";
 
-const Login = () => import('./components/Login.vue')
-const User = () => import('./theme/User.vue')
-const About = () => import('./theme/About.vue')
-const NotFound = () => import('./theme/NotFound.vue')
+Vue.use(Router);
 
-Vue.use(VueRouter)
-
-const router = new VueRouter({
-  mode: 'history',
-  linkActiveClass: 'is-active',
-  scrollBehavior: (to, from, savedPosition) => ({y: 0}),
+export default new Router({
+  mode: "history",
+  linkActiveClass: "is-active",
+  base: process.env.BASE_URL,
   routes: [
-    {path: '/login', component: Login},
-    {path: '/about', component: About},
-    {path: '/user/:id', name: 'user', component: User},
-    {path: '/', component: User},
-    {path: '*', component: NotFound}
+    {
+      path: "/",
+      name: "home",
+      component: Home
+    },
+    {
+      path: "/about",
+      name: "about",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/About.vue")
+    },
+    {
+      path: "/user/:id",
+      name: "user",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/User.vue")
+    }
   ]
-})
-
-export default router
+});
